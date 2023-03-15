@@ -7,8 +7,8 @@ load(
 cc_library(
     name = "python_bindings_internal_hdrs",
     hdrs = [
-        "core/qos_pybind.h",
         "drake_ros_pybind.h",
+        "qos_pybind.h",
     ],
     include_prefix = "drake_ros/",
 )
@@ -22,9 +22,9 @@ pybind_py_library(
     cc_so_name = "_cc",
     cc_srcs = [
         "cc_py.cc",
-        "core/cc_pybind.cc",
-        "tf2/cc_pybind.cc",
-        "viz/cc_pybind.cc",
+        "core_pybind.cc",
+        "tf2_pybind.cc",
+        "viz_pybind.cc",
     ],
     py_deps = [
         "@drake//bindings/pydrake",
@@ -34,12 +34,7 @@ pybind_py_library(
 
 py_library(
     name = "drake_ros_py",
-    srcs = [
-        "__init__.py",
-        "core/__init__.py",
-        "tf2/__init__.py",
-        "viz/__init__.py",
-    ],
+    srcs = ["__init__.py"],
     imports = [".."],
     visibility = ["//:__pkg__"],
     deps = [

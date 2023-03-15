@@ -12,7 +12,6 @@
 #include <visualization_msgs/msg/marker_array.hpp>
 
 namespace drake_ros {
-namespace viz {
 
 /// Set of parameters that configure a SceneMarkersSystem.
 struct SceneMarkersParams {
@@ -101,5 +100,4 @@ class SceneMarkersSystem : public drake::systems::LeafSystem<double> {
   std::unique_ptr<SceneMarkersSystemPrivate> impl_;
 };
 
-}  // namespace viz
 }  // namespace drake_ros

@@ -16,9 +16,9 @@ from pydrake.systems.analysis import Simulator
 from pydrake.systems.framework import DiagramBuilder
 from pydrake.systems.primitives import ConstantVectorSource
 
-import drake_ros.core
-from drake_ros.core import RosInterfaceSystem
-from drake_ros.viz import RvizVisualizer
+import drake_ros
+from drake_ros import RosInterfaceSystem
+from drake_ros import RvizVisualizer
 
 
 class ManagedSubscription:
@@ -93,7 +93,7 @@ class ManagedSubscription:
 
 class DrakeTestSystem:
     def __init__(self):
-        drake_ros.core.init()
+        drake_ros.init()
 
         builder = DiagramBuilder()
         ros_interface_system = builder.AddSystem(

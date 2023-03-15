@@ -5,7 +5,6 @@
 #include <utility>
 
 namespace drake_ros {
-namespace core {
 struct RosInterfaceSystem::Impl {
   // Interface to ROS (through a node).
   std::unique_ptr<DrakeRos> ros;
@@ -33,5 +32,4 @@ void RosInterfaceSystem::DoCalcNextUpdateTime(
   // order of node spinning and message taking affects it?
   *time = std::numeric_limits<double>::infinity();
 }
-}  // namespace core
 }  // namespace drake_ros

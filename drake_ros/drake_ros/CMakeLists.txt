@@ -1,18 +1,16 @@
-pybind11_add_module(py_drake_ros_core SHARED
+pybind11_add_module(py_drake_ros SHARED
   "cc_py.cc"
-  "core/cc_pybind.cc"
-  "tf2/cc_pybind.cc"
-  "viz/cc_pybind.cc"
+  "core_pybind.cc"
+  "tf2_pybind.cc"
+  "viz_pybind.cc"
 )
-target_link_libraries(py_drake_ros_core PRIVATE
-    drake_ros_core
-    drake_ros_tf2
-    drake_ros_viz)
-set_target_properties(py_drake_ros_core
+target_link_libraries(py_drake_ros PRIVATE
+    drake_ros)
+set_target_properties(py_drake_ros
   PROPERTIES
     OUTPUT_NAME "_cc"
     LIBRARY_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/py/drake_ros/")
-target_include_directories(py_drake_ros_core
+target_include_directories(py_drake_ros
   PRIVATE
     "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}>"
 )
@@ -20,7 +18,7 @@ target_include_directories(py_drake_ros_core
 ament_get_python_install_dir(python_install_dir)
 
 install(
-  TARGETS py_drake_ros_core
+  TARGETS py_drake_ros
   DESTINATION "${python_install_dir}/drake_ros/"
 )
 

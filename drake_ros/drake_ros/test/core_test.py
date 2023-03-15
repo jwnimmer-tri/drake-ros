@@ -15,10 +15,10 @@ from rclpy.qos import ReliabilityPolicy
 
 from test_msgs.msg import BasicTypes
 
-import drake_ros.core
-from drake_ros.core import RosInterfaceSystem
-from drake_ros.core import RosPublisherSystem
-from drake_ros.core import RosSubscriberSystem
+import drake_ros
+from drake_ros import RosInterfaceSystem
+from drake_ros import RosPublisherSystem
+from drake_ros import RosSubscriberSystem
 
 
 def isolate_if_using_bazel():
@@ -30,7 +30,7 @@ def isolate_if_using_bazel():
 
 def test_nominal_case():
     isolate_if_using_bazel()
-    drake_ros.core.init()
+    drake_ros.init()
 
     builder = DiagramBuilder()
 
@@ -105,7 +105,7 @@ def test_nominal_case():
         assert len(rx_msgs_direct_sub_out) == rx_msgs_count_after_pubsub
         assert rx_msgs_direct_sub_out[-1].uint64_value == i
 
-    drake_ros.core.shutdown()
+    drake_ros.shutdown()
 
 
 if __name__ == '__main__':

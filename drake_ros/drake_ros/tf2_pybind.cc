@@ -15,17 +15,6 @@ using drake::systems::Diagram;
 using drake::systems::TriggerType;
 
 void DefTf2(py::module m) {
-  m.doc() = "Python wrapper for drake_ros.tf2";
-
-  using drake_ros::core::DrakeRos;
-  using drake_ros::tf2::SceneTfBroadcasterParams;
-  using drake_ros::tf2::SceneTfBroadcasterSystem;
-
-  py::module::import("drake_ros.core");
-
-  py::module::import("pydrake.systems.framework");
-  py::module::import("pydrake.multibody.plant");
-
   const SceneTfBroadcasterParams default_params{};
   py::class_<SceneTfBroadcasterParams>(m, "SceneTfBroadcasterParams")
       .def(

@@ -4,7 +4,6 @@
 #include <string>
 
 namespace drake_ros {
-namespace tf2 {
 namespace internal {
 
 std::string ReplaceAllOccurrences(std::string string, const std::string& target,
@@ -61,5 +60,4 @@ std::string CalcTfFrameName(const std::string& frame_name,
 }
 
 }  // namespace internal
-}  // namespace tf2
 }  // namespace drake_ros

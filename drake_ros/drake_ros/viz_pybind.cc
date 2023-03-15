@@ -11,20 +11,10 @@
 namespace drake_ros {
 namespace drake_ros_py DRAKE_ROS_NO_EXPORT {
 
-using drake_ros::core::DrakeRos;
-using drake_ros::viz::RvizVisualizer;
-using drake_ros::viz::RvizVisualizerParams;
-
 using drake::systems::Diagram;
 using drake::systems::TriggerType;
 
 void DefViz(py::module m) {
-  m.doc() = "Python wrapper for drake_ros_viz";
-
-  py::module::import("drake_ros.core");
-  py::module::import("pydrake.systems.framework");
-  py::module::import("pydrake.multibody.plant");
-
   const RvizVisualizerParams default_params{};
   py::class_<RvizVisualizerParams>(m, "RvizVisualizerParams")
       .def(py::init([](const std::unordered_set<drake::systems::TriggerType>&

@@ -8,23 +8,15 @@
 #include "drake_ros/core/drake_ros.h"
 #include "drake_ros/core/geometry_conversions.h"
 #include "drake_ros/core/geometry_conversions_pybind.h"
-#include "drake_ros/core/qos_pybind.h"
 #include "drake_ros/core/ros_interface_system.h"
 #include "drake_ros/core/ros_publisher_system.h"
 #include "drake_ros/core/ros_subscriber_system.h"
 #include "drake_ros/core/serializer_interface.h"
 #include "drake_ros/drake_ros_pybind.h"
+#include "drake_ros/qos_pybind.h"
 
 namespace drake_ros {
 namespace drake_ros_py DRAKE_ROS_NO_EXPORT {
-
-using drake_ros::core::DrakeRos;
-using drake_ros::core::init;
-using drake_ros::core::RosInterfaceSystem;
-using drake_ros::core::RosPublisherSystem;
-using drake_ros::core::RosSubscriberSystem;
-using drake_ros::core::SerializerInterface;
-using drake_ros::core::shutdown;
 
 using drake::systems::LeafSystem;
 using drake::systems::TriggerType;
@@ -78,14 +70,6 @@ class PySerializerInterface : public py::wrapper<SerializerInterface> {
 };
 
 void DefCore(py::module m) {
-  m.doc() = "Python bindings for drake_ros.core";
-
-  py::module::import("numpy");
-  py::module::import("pydrake.systems.framework");
-  py::module::import("pydrake.multibody.plant");
-  py::module::import("pydrake.math");
-  py::module::import("pydrake.common.eigen_geometry");
-
   // TODD(hidmic): populate Python docstrings with
   // C++ docstrings. Consider using mkdoc to keep
   // them in sync, like pydrake does.
@@ -164,71 +148,71 @@ void DefCore(py::module m) {
 
   // Python bindings for geometry conversions.
   // Vector / Translation functions.
-  m.def("RosPointToVector3", &drake_ros::core::RosPointToVector3,
+  m.def("RosPointToVector3", &RosPointToVector3,
         py::arg("point"));
-  m.def("Vector3ToRosPoint", &drake_ros::core::Vector3ToRosPoint,
+  m.def("Vector3ToRosPoint", &Vector3ToRosPoint,
         py::arg("point"));
-  m.def("RosVector3ToVector3", &drake_ros::core::RosVector3ToVector3,
+  m.def("RosVector3ToVector3", &RosVector3ToVector3,
         py::arg("point"));
-  m.def("Vector3ToRosVector3", &drake_ros::core::Vector3ToRosVector3,
+  m.def("Vector3ToRosVector3", &Vector3ToRosVector3,
         py::arg("point"));
 
   // Orientation
   m.def("RosQuaternionToQuaternion",
-        &drake_ros::core::RosQuaternionToQuaternion, py::arg("quat"));
+        &RosQuaternionToQuaternion, py::arg("quat"));
   m.def("QuaternionToRosQuaternion",
-        &drake_ros::core::QuaternionToRosQuaternion, py::arg("quat"));
+        &QuaternionToRosQuaternion, py::arg("quat"));
   m.def("RosQuaternionToRotationMatrix",
-        &drake_ros::core::RosQuaternionToRotationMatrix, py::arg("quat"));
+        &RosQuaternionToRotationMatrix, py::arg("quat"));
   m.def("RotationMatrixToRosQuaternion",
-        &drake_ros::core::RotationMatrixToRosQuaternion, py::arg("rotation"));
+        &RotationMatrixToRosQuaternion, py::arg("rotation"));
 
   // Pose
-  m.def("RosPoseToRigidTransform", &drake_ros::core::RosPoseToRigidTransform,
+  m.def("RosPoseToRigidTransform", &RosPoseToRigidTransform,
         py::arg("pose"));
-  m.def("RigidTransformToRosPose", &drake_ros::core::RigidTransformToRosPose,
+  m.def("RigidTransformToRosPose", &RigidTransformToRosPose,
         py::arg("transform"));
   m.def("RosTransformToRigidTransform",
-        &drake_ros::core::RosTransformToRigidTransform, py::arg("transform"));
+        &RosTransformToRigidTransform, py::arg("transform"));
   m.def("RigidTransformToRosTransform",
-        &drake_ros::core::RigidTransformToRosTransform, py::arg("transform"));
-  m.def("RosPoseToIsometry3", &drake_ros::core::RosPoseToIsometry3,
+        &RigidTransformToRosTransform, py::arg("transform"));
+  m.def("RosPoseToIsometry3", &RosPoseToIsometry3,
         py::arg("pose"));
-  m.def("Isometry3ToRosPose", &drake_ros::core::Isometry3ToRosPose,
+  m.def("Isometry3ToRosPose", &Isometry3ToRosPose,
         py::arg("isometry"));
-  m.def("RosTransformToIsometry3", &drake_ros::core::RosTransformToIsometry3,
+  m.def("RosTransformToIsometry3", &RosTransformToIsometry3,
         py::arg("transform"));
-  m.def("Isometry3ToRosTransform", &drake_ros::core::Isometry3ToRosTransform,
+  m.def("Isometry3ToRosTransform", &Isometry3ToRosTransform,
         py::arg("isometry"));
 
   // Spatial Velocity
-  m.def("RosTwistToVector6", &drake_ros::core::RosTwistToVector6,
+  m.def("RosTwistToVector6", &RosTwistToVector6,
         py::arg("twist"));
-  m.def("Vector6ToRosTwist", &drake_ros::core::Vector6ToRosTwist,
+  m.def("Vector6ToRosTwist", &Vector6ToRosTwist,
         py::arg("vector"));
   m.def("RosTwistToSpatialVelocity",
-        &drake_ros::core::RosTwistToSpatialVelocity, py::arg("twist"));
+        &RosTwistToSpatialVelocity, py::arg("twist"));
   m.def("SpatialVelocityToRosTwist",
-        &drake_ros::core::SpatialVelocityToRosTwist, py::arg("velocity"));
+        &SpatialVelocityToRosTwist, py::arg("velocity"));
 
   // Spatial Acceleration
-  m.def("RosAccelToVector6", &drake_ros::core::RosAccelToVector6,
+  m.def("RosAccelToVector6", &RosAccelToVector6,
         py::arg("accel"));
-  m.def("Vector6ToRosAccel", &drake_ros::core::Vector6ToRosAccel,
+  m.def("Vector6ToRosAccel", &Vector6ToRosAccel,
         py::arg("vector"));
   m.def("RosAccelToSpatialAcceleration",
-        &drake_ros::core::RosAccelToSpatialAcceleration, py::arg("accel"));
+        &RosAccelToSpatialAcceleration, py::arg("accel"));
   m.def("SpatialAccelerationToRosAccel",
-        &drake_ros::core::SpatialAccelerationToRosAccel, py::arg("accel"));
+        &SpatialAccelerationToRosAccel, py::arg("accel"));
 
   // Spatial Force
-  m.def("RosWrenchToVector6", &drake_ros::core::RosWrenchToVector6,
+  m.def("RosWrenchToVector6", &RosWrenchToVector6,
         py::arg("wrench"));
-  m.def("Vector6ToRosWrench", &drake_ros::core::Vector6ToRosWrench,
+  m.def("Vector6ToRosWrench", &Vector6ToRosWrench,
         py::arg("vector"));
-  m.def("RosWrenchToSpatialForce", &drake_ros::core::RosWrenchToSpatialForce,
+  m.def("RosWrenchToSpatialForce", &RosWrenchToSpatialForce,
         py::arg("wrench"));
-  m.def("SpatialForceToRosWrench", &drake_ros::core::SpatialForceToRosWrench,
+  m.def("SpatialForceToRosWrench", &SpatialForceToRosWrench,
         py::arg("force"));
 }
 // clang-format off

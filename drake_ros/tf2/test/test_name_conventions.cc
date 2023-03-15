@@ -10,59 +10,62 @@ using drake::multibody::ModelInstanceIndex;
 using drake::multibody::MultibodyPlant;
 using drake::systems::DiagramBuilder;
 
+namespace drake_ros {
+namespace {
+
 TEST(NameConventions, CalcTfFrameNameWithBody) {
   // All names are present
   EXPECT_EQ("model_name/body_name/456",
-            drake_ros::tf2::internal::CalcTfFrameName<int>(
+            internal::CalcTfFrameName<int>(
                 "model_name", "body_name", 123, 456));
 
   // Scoped model name and body name
   EXPECT_EQ("model_scope/model_name/body_scope/body_name/456",
-            drake_ros::tf2::internal::CalcTfFrameName(
+            internal::CalcTfFrameName(
                 "model_scope::model_name", "body_scope::body_name", 123, 456));
 
   // Model name with empty body name
   EXPECT_EQ(
       "model_name/unnamed_body_123/456",
-      drake_ros::tf2::internal::CalcTfFrameName("model_name", "", 123, 456));
+      internal::CalcTfFrameName("model_name", "", 123, 456));
 
   // Scoped model name with empty body name
   EXPECT_EQ("model_scope/model_name/unnamed_body_123/456",
-            drake_ros::tf2::internal::CalcTfFrameName("model_scope::model_name",
-                                                      "", 123, 456));
+            internal::CalcTfFrameName("model_scope::model_name",
+                                      "", 123, 456));
 }
 
 TEST(NameConventions, CalcTfFrameNameWithoutBody) {
   // Frame name is not empty
   EXPECT_EQ("frame_name",
-            drake_ros::tf2::internal::CalcTfFrameName("frame_name", 123));
+            internal::CalcTfFrameName("frame_name", 123));
 
   // Frame name is empty
   EXPECT_EQ("unnamed_frame_123",
-            drake_ros::tf2::internal::CalcTfFrameName("", 123));
+            internal::CalcTfFrameName("", 123));
 
   // Frame name with / delimiters
   EXPECT_EQ("scope_one/scope_two/frame_name",
-            drake_ros::tf2::internal::CalcTfFrameName(
+            internal::CalcTfFrameName(
                 "scope_one/scope_two/frame_name", 123));
 
   // Frame name with :: delimiters
   EXPECT_EQ("scope_one/scope_two/frame_name",
-            drake_ros::tf2::internal::CalcTfFrameName(
+            internal::CalcTfFrameName(
                 "scope_one::scope_two::frame_name", 123));
 
   // Frame name with mixed delimiters
   EXPECT_EQ("scope_one/scope_two/frame_name",
-            drake_ros::tf2::internal::CalcTfFrameName(
+            internal::CalcTfFrameName(
                 "scope_one/scope_two::frame_name", 123));
 
   // Frame name with only :: delimiter
   EXPECT_EQ("unnamed_frame_123",
-            drake_ros::tf2::internal::CalcTfFrameName("::", 123));
+            internal::CalcTfFrameName("::", 123));
 
   // Frame name with only / delimiter
   EXPECT_EQ("unnamed_frame_123",
-            drake_ros::tf2::internal::CalcTfFrameName("/", 123));
+            internal::CalcTfFrameName("/", 123));
 }
 
 TEST(NameConventions, GetTfFrameNameWorld) {
@@ -78,6 +81,9 @@ TEST(NameConventions, GetTfFrameNameWorld) {
   FrameId frame_id = plant.GetBodyFrameIdOrThrow(
       plant.GetBodyIndices(world_model_index).at(0));
 
-  EXPECT_EQ("world", drake_ros::tf2::GetTfFrameName(
+  EXPECT_EQ("world", GetTfFrameName(
                          scene_graph.model_inspector(), plants, frame_id));
 }
+
+}  // namespace
+}  // namespace drake_ros

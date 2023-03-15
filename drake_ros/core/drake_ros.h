@@ -7,7 +7,6 @@
 #include <rclcpp/node_options.hpp>
 
 namespace drake_ros {
-namespace core {
 
 /** A Drake ROS interface that wraps a live ROS node.
 
@@ -66,5 +65,4 @@ void init(int argc = 0, const char** argv = nullptr);
 */
 bool shutdown();
 
-}  // namespace core
 }  // namespace drake_ros

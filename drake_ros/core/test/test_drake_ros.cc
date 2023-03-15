@@ -8,12 +8,13 @@
 
 #include "drake_ros/core/drake_ros.h"
 
-using drake_ros::core::DrakeRos;
+namespace drake_ros {
+namespace {
 
 TEST(DrakeRos, default_construct) {
-  drake_ros::core::init();
+  init();
   EXPECT_NO_THROW(std::make_unique<DrakeRos>("default_node"));
-  EXPECT_TRUE(drake_ros::core::shutdown());
+  EXPECT_TRUE(shutdown());
 }
 
 TEST(DrakeRos, local_context) {
@@ -35,6 +36,9 @@ TEST(DrakeRos, environment) {
   const char* const ament_prefix_path = std::getenv("AMENT_PREFIX_PATH");
   ASSERT_NE(ament_prefix_path, nullptr);
 }
+
+}  // namespace
+}  // namespace drake_ros
 
 // Only available in Bazel.
 #ifndef _TEST_DISABLE_RMW_ISOLATION

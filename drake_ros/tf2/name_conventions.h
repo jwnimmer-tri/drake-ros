@@ -7,7 +7,6 @@
 #include <drake/multibody/plant/multibody_plant.h>
 
 namespace drake_ros {
-namespace tf2 {
 
 /** Retrieve conventional tf frame name for a given scene frame.
 
@@ -48,5 +47,4 @@ std::string GetTfFrameName(
     const drake::multibody::Body<double>& body,
     const drake::multibody::MultibodyPlant<double>* plant,
     const drake::geometry::FrameId& frame_id);
-}  // namespace tf2
 }  // namespace drake_ros

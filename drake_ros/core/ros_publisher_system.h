@@ -14,7 +14,6 @@
 #include "drake_ros/core/serializer_interface.h"
 
 namespace drake_ros {
-namespace core {
 /** A system that can publish ROS messages.
  It accepts ROS messages on its sole input port and publishes them
  to a ROS topic.
@@ -84,5 +83,4 @@ class RosPublisherSystem : public drake::systems::LeafSystem<double> {
   struct Impl;
   std::unique_ptr<Impl> impl_;
 };
-}  // namespace core
 }  // namespace drake_ros

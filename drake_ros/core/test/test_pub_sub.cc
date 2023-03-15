@@ -13,13 +13,11 @@
 #include "drake_ros/core/ros_publisher_system.h"
 #include "drake_ros/core/ros_subscriber_system.h"
 
-using drake_ros::core::DrakeRos;
-using drake_ros::core::RosInterfaceSystem;
-using drake_ros::core::RosPublisherSystem;
-using drake_ros::core::RosSubscriberSystem;
+namespace drake_ros {
+namespace {
 
 TEST(Integration, sub_to_pub) {
-  drake_ros::core::init(0, nullptr);
+  init(0, nullptr);
 
   drake::systems::DiagramBuilder<double> builder;
 
@@ -90,8 +88,11 @@ TEST(Integration, sub_to_pub) {
     EXPECT_EQ(rx_msgs_direct_sub_out.back()->uint64_value, i);
   }
 
-  drake_ros::core::shutdown();
+  shutdown();
 }
+
+}  // namespace
+}  // namespace drake_ros
 
 // Only available in Bazel.
 #ifndef _TEST_DISABLE_RMW_ISOLATION

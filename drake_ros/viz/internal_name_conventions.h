@@ -7,11 +7,11 @@
 #include "drake_ros/viz/name_conventions.h"
 
 namespace drake_ros {
-namespace viz {
 namespace internal {
 
-std::string ReplaceAllOccurrences(std::string string, const std::string& target,
-                                  const std::string& replacement) {
+inline std::string ReplaceAllOccurrences(std::string string,
+                                         const std::string& target,
+                                         const std::string& replacement) {
   std::string::size_type n = 0;
   while ((n = string.find(target, n)) != std::string::npos) {
     string.replace(n, target.size(), replacement);
@@ -25,7 +25,7 @@ std::string ReplaceAllOccurrences(std::string string, const std::string& target,
   @param[in] prefix user defined prefix for this marker namespace
   @param[in] geometry_owning_source_name owning source name for the geometry
  */
-std::string CalcMarkerNamespace(
+inline std::string CalcMarkerNamespace(
     const std::string& prefix, const std::string& geometry_owning_source_name) {
   return prefix + ReplaceAllOccurrences(geometry_owning_source_name, "::", "/");
 }
@@ -38,7 +38,7 @@ std::string CalcMarkerNamespace(
   @param[in] geometry_name name of a given geometry.
   @returns formulated marker namespace.
  */
-std::string CalcHierarchicalMarkerNamespace(
+inline std::string CalcHierarchicalMarkerNamespace(
     const std::string& prefix, const std::string& model_instance_name,
     const std::string& body_name, const std::string& geometry_name) {
   std::stringstream ss;
@@ -66,7 +66,7 @@ std::string CalcHierarchicalMarkerNamespace(
   @param[in] geometry_name name of a given geometry.
   @returns formulated marker namespace.
  */
-std::string CalcHierarchicalMarkerNamespace(
+inline std::string CalcHierarchicalMarkerNamespace(
     const std::string& prefix, const std::string& geometry_source_name,
     const std::string& geometry_name) {
   std::stringstream ss;
@@ -82,5 +82,4 @@ std::string CalcHierarchicalMarkerNamespace(
 }
 
 }  // namespace internal
-}  // namespace viz
 }  // namespace drake_ros

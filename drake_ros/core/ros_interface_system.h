@@ -7,7 +7,6 @@
 #include "drake_ros/core/drake_ros.h"
 
 namespace drake_ros {
-namespace core {
 /** A system that manages a Drake ROS interface. */
 class RosInterfaceSystem : public drake::systems::LeafSystem<double> {
  public:
@@ -28,5 +27,4 @@ class RosInterfaceSystem : public drake::systems::LeafSystem<double> {
   struct Impl;
   std::unique_ptr<Impl> impl_;
 };
-}  // namespace core
 }  // namespace drake_ros

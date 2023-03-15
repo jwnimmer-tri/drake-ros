@@ -3,10 +3,10 @@ import sys
 
 import numpy as np
 
-import drake_ros.core
-from drake_ros.core import RosInterfaceSystem
-from drake_ros.tf2 import SceneTfBroadcasterSystem
-from drake_ros.tf2 import SceneTfBroadcasterParams
+import drake_ros
+from drake_ros import RosInterfaceSystem
+from drake_ros import SceneTfBroadcasterParams
+from drake_ros import SceneTfBroadcasterSystem
 
 from pydrake.common.value import AbstractValue
 from pydrake.math import RigidTransform
@@ -28,7 +28,7 @@ import tf2_ros
 
 
 def test_nominal_case():
-    drake_ros.core.init()
+    drake_ros.init()
 
     builder = DiagramBuilder()
 

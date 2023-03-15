@@ -15,7 +15,8 @@
 
 #include "drake_ros/viz/scene_markers_system.h"
 
-using drake_ros::viz::SceneMarkersSystem;
+namespace drake_ros {
+namespace {
 
 static constexpr char kSourceName[] = "test";
 static constexpr double kTolerance{1e-6};
@@ -581,3 +582,6 @@ using SingleGeometrySceneTestDetails = ::testing::Types<
 INSTANTIATE_TYPED_TEST_SUITE_P(SingleGeometrySceneMarkersTests,
                                SceneMarkersTest,
                                SingleGeometrySceneTestDetails);
+
+}  // namespace
+}  // namespace drake_ros

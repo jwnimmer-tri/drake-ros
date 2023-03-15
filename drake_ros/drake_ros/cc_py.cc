@@ -24,10 +24,16 @@ void DefTest(py::module m) {
 PYBIND11_MODULE(_cc, m) {
   m.doc() = "Python bindings for drake_ros";
 
+  py::module::import("numpy");
+  py::module::import("pydrake.common.eigen_geometry");
+  py::module::import("pydrake.math");
+  py::module::import("pydrake.multibody.plant");
+  py::module::import("pydrake.systems.framework");
+
+  DefCore(m);
+  DefTf2(m);
+  DefViz(m);
   DefTest(m.def_submodule("_test"));
-  DefCore(m.def_submodule("core"));
-  DefTf2(m.def_submodule("tf2"));
-  DefViz(m.def_submodule("viz"));
 }
 
 }  // namespace

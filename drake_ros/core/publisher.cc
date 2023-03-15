@@ -5,7 +5,6 @@
 #include <rclcpp/version.h>
 
 namespace drake_ros {
-namespace core {
 namespace internal {
 namespace {
 // Copied from rosbag2_transport rosbag2_get_publisher_options
@@ -46,5 +45,4 @@ void Publisher::publish(const rclcpp::SerializedMessage& serialized_msg) {
   }
 }
 }  // namespace internal
-}  // namespace core
 }  // namespace drake_ros

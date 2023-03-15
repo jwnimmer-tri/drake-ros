@@ -8,7 +8,6 @@
 #include <drake/multibody/plant/multibody_plant.h>
 
 namespace drake_ros {
-namespace viz {
 
 /** A functor that returns the marker namespace given information of a geometry.
   @param[in] inspector inspector for a given SceneGraph's data.
@@ -39,5 +38,4 @@ MarkerNamespaceFunction GetFlatMarkerNamespaceFunction(
 MarkerNamespaceFunction GetHierarchicalMarkerNamespaceFunction(
     const std::optional<std::string>& marker_namespace_prefix = std::nullopt);
 
-}  // namespace viz
 }  // namespace drake_ros

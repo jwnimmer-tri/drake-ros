@@ -22,13 +22,11 @@
 
 #include "drake_ros/tf2/scene_tf_broadcaster_system.h"
 
-using drake_ros::core::DrakeRos;
-using drake_ros::core::RosInterfaceSystem;
-using drake_ros::tf2::SceneTfBroadcasterParams;
-using drake_ros::tf2::SceneTfBroadcasterSystem;
+namespace drake_ros {
+namespace {
 
 TEST(SceneTfBroadcasting, NominalCase) {
-  drake_ros::core::init();
+  init();
 
   drake::systems::DiagramBuilder<double> builder;
 
@@ -121,8 +119,11 @@ TEST(SceneTfBroadcasting, NominalCase) {
   EXPECT_DOUBLE_EQ(odom_to_base_link.transform.rotation.z, R_OB.z());
   EXPECT_DOUBLE_EQ(odom_to_base_link.transform.rotation.w, R_OB.w());
 
-  EXPECT_TRUE(drake_ros::core::shutdown());
+  EXPECT_TRUE(shutdown());
 }
+
+}  // namespace
+}  // namespace drake_ros
 
 // Only available in Bazel.
 #ifndef _TEST_DISABLE_RMW_ISOLATION

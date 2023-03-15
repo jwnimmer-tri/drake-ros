@@ -9,7 +9,6 @@
 #include <rosidl_runtime_c/message_type_support_struct.h>
 
 namespace drake_ros {
-namespace core {
 namespace internal {
 // A type-erased version of rclcpp:::Publisher<Message>.
 // This class conforms to the ROS 2 C++ style for consistency.
@@ -24,5 +23,4 @@ class Publisher final : public rclcpp::PublisherBase {
   void publish(const rclcpp::SerializedMessage& serialized_msg);
 };
 }  // namespace internal
-}  // namespace core
 }  // namespace drake_ros
